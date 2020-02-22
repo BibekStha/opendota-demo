@@ -9,27 +9,37 @@ document.addEventListener("DOMContentLoaded", () => {
       return res.json();
     })
     .then(data => {
-      data.forEach(player => {
-        let name = player.personaname;
-        let imageUrl = player.avatarfull;
+      // data = data.slice(0, 40);
+      let counter = 0;
+      try {
+        data.forEach(player => {
+          let name = player.personaname;
+          let imageUrl = player.avatarfull;
 
-        console.log(name);
-        console.log(imageUrl);
+          console.log(name);
+          console.log(imageUrl);
 
-        let playerEl = document.createElement("div");
-        playerEl.setAttribute("class", "col col-2 p-2");
+          let playerEl = document.createElement("div");
+          playerEl.setAttribute("class", "col col-2 p-2");
 
-        let imageEl = document.createElement("img");
-        imageEl.setAttribute("src", imageUrl);
+          let imageEl = document.createElement("img");
+          imageEl.setAttribute("src", imageUrl);
 
-        let nameEl = document.createElement("div");
-        nameEl.setAttribute("class", "text-center");
-        nameEl.innerHTML = name;
+          let nameEl = document.createElement("div");
+          nameEl.setAttribute("class", "text-center");
+          nameEl.innerHTML = name;
 
-        playerEl.appendChild(imageEl);
-        playerEl.appendChild(nameEl);
+          playerEl.appendChild(imageEl);
+          playerEl.appendChild(nameEl);
 
-        proPlayersEl.appendChild(playerEl);
-      });
+          proPlayersEl.appendChild(playerEl);
+
+          counter += 1;
+          console.log(counter);
+          if (counter >= 50) {
+            throw BreakException;
+          }
+        });
+      } catch (e) {}
     });
 });
